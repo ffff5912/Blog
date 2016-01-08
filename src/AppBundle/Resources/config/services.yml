@@ -1,0 +1,5 @@
+parameters:
+
+services:
+  entity_manager:
+    synthetic: true    
