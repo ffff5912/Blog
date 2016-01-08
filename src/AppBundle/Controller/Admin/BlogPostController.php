@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +14,7 @@ use AppBundle\Service\BlogPost;
 /**
  * @Route("/admin/blog")
  */
-class AdminBlogPostController extends Controller
+class BlogPostController extends Controller
 {
     /**
      * @var FormFactory
@@ -60,7 +60,7 @@ class AdminBlogPostController extends Controller
         if ($form->isValid()) {
             $this->service->run($form->getData());
 
-            return $this->redirect($this->generateUrl('app_adminblogpost_complete'));
+            return $this->redirect($this->generateUrl('app_admin_blogpost_complete'));
         }
 
         return $this->render('Admin/Blog/index.html.twig', [

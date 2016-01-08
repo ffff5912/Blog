@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class AdminMenuController extends Controller
+class MenuController extends Controller
 {
     /**
      * @Route("/admin/")
