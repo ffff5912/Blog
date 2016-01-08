@@ -9,8 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="blog_article")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BlogArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class BlogArticle
+class BlogArticle implements EntityInterface
 {
     /**
      * @var int
@@ -178,5 +179,22 @@ class BlogArticle
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->setCreatedAt(new \DateTime('now'));
+        $this->setUpdatedAt(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
     }
 }

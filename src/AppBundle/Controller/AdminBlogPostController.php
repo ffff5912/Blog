@@ -4,10 +4,12 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\BlogArticle;
+use AppBundle\Service\BlogPost;
 
 /**
  * @Route("/admin/blog")
@@ -15,13 +17,25 @@ use AppBundle\Entity\BlogArticle;
 class AdminBlogPostController extends Controller
 {
     /**
+     * @var FormFactory
+     */
+    private $form_factory;
+
+    /**
+     * @var BlogPost
+     */
+    private $service;
+
+    /**
      * @DI\InjectParams({
-     *   "form_factory" = @DI\Inject("form.factory")
+     *   "form_factory" = @DI\Inject("form.factory"),
+     *   "service" = @DI\Inject("app.blog_post")
      * })
      */
-    public function __construct($form_factory)
+    public function __construct(FormFactory $form_factory, BlogPost $service)
     {
         $this->form_factory = $form_factory;
+        $this->service = $service;
     }
 
     /**
@@ -30,7 +44,7 @@ class AdminBlogPostController extends Controller
      */
     public function indexAction()
     {
-        $form = $this->get('form.factory')->create('blog_article');
+        $form = $this->form_factory->create('blog_article');
 
         return $this->render('Admin/Blog/index.html.twig', ['form' => $form->createView()]);
     }
@@ -41,32 +55,24 @@ class AdminBlogPostController extends Controller
      */
     public function indexPostAction(Request $request)
     {
-        $form = $this-get('form.factory')->create('blog_article');
+        $form = $this->form_factory->create('blog_article');
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $blog = $form->getData();
+            $this->service->run($form->getData());
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($blog);
-            $em->flush();
+            return $this->redirect($this->generateUrl('app_adminblogpost_complete'));
         }
 
         return $this->render('Admin/Blog/index.html.twig', [
-            'form' => $form->crateView()
+            'form' => $form->createView()
         ]);
     }
 
     /**
-     * @return Form
+     * @Route("/complete")
      */
-    private function createBlogForm()
+    public function completeAction()
     {
-        return $this->createFormBuilder(new BlogArticle())
-            ->add('title', 'text')
-            ->add('content', 'textarea')
-            ->add('submit', 'submit', [
-                'label' => '投稿'
-            ])
-            ->getForm();
+        return $this->render('Admin/Blog/complete.html.twig');
     }
 }

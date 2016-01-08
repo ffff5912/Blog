@@ -1,5 +1,8 @@
 parameters:
 
 services:
-  entity_manager:
-    synthetic: true    
+    app.blog_article_repository:
+        class: AppBundle\Repository\BlogArticleRepository
+        factory: [@doctrine.orm.entity_manager, getRepository]
+        arguments:
+            - AppBundle\Entity\BlogArticle
