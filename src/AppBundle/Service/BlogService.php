@@ -7,9 +7,9 @@ use AppBundle\Entity\BlogArticle;
 use AppBundle\Repository\BlogArticleRepository;
 
 /**
- * @DI\Service("app.blog_post")
+ * @DI\Service("app.blog_service")
  */
-class BlogPost
+class BlogService
 {
     /**
      * @var BlogArticleRepository
@@ -27,11 +27,16 @@ class BlogPost
         $this->repository = $repository;
     }
 
+    public function getAllPosts()
+    {
+        return $this->repository->findAll();
+    }
+
     /**
      * @param  BlogArticle $blog_article
      * @return
      */
-    public function run(BlogArticle $blog_article)
+    public function add(BlogArticle $blog_article)
     {
         $this->repository->add($blog_article);
     }

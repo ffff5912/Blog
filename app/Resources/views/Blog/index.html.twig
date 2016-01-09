@@ -1,6 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="container">
+<section>
+    <div class="container">
+        <div class="row pad-row">
+            <div class="">
+                {% for post in posts %}
+                <h2>{{ post.title }}</h2>
+                <p>
+                    {{ post.content }}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+</section>
 {% endblock %}

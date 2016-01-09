@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\BlogArticle;
-use AppBundle\Service\BlogPost;
+use AppBundle\Service\BlogService;
 
 /**
  * @Route("/admin/blog")
@@ -22,17 +22,17 @@ class BlogPostController extends Controller
     private $form_factory;
 
     /**
-     * @var BlogPost
+     * @var BlogService
      */
     private $service;
 
     /**
      * @DI\InjectParams({
      *   "form_factory" = @DI\Inject("form.factory"),
-     *   "service" = @DI\Inject("app.blog_post")
+     *   "service" = @DI\Inject("app.blog_service")
      * })
      */
-    public function __construct(FormFactory $form_factory, BlogPost $service)
+    public function __construct(FormFactory $form_factory, BlogService $service)
     {
         $this->form_factory = $form_factory;
         $this->service = $service;
@@ -58,7 +58,7 @@ class BlogPostController extends Controller
         $form = $this->form_factory->create('blog_article');
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $this->service->run($form->getData());
+            $this->service->add($form->getData());
 
             return $this->redirect($this->generateUrl('app_admin_blogpost_complete'));
         }
