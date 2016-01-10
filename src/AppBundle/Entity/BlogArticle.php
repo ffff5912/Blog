@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints As Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\Comment;
 
 /**
  * BlogArticle
@@ -40,6 +42,13 @@ class BlogArticle implements EntityInterface
     private $content;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
+     */
+    private $comments;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -52,6 +61,11 @@ class BlogArticle implements EntityInterface
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updated_at;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
 
     /**
@@ -199,5 +213,39 @@ class BlogArticle implements EntityInterface
     public function onPreUpdate()
     {
         $this->setUpdatedAt(new \DateTime('now'));
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return BlogArticle
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
