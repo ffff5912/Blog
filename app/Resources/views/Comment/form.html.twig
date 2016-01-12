@@ -1,0 +1,3 @@
+<form action="{{ path('app_comment_create', { 'id' : comment.blog.id } ) }}" method="post" {{ form_enctype(form) }} class="">
+    {{ form_widget(form) }}
+</form>

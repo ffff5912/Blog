@@ -20,5 +20,7 @@
             {% endfor %}
         </div>
     </div>
+    <h3>コメントする</h3>
+    {{ render(controller('AppBundle:Comment:index', {'id': blog.id })) }}
 </section>
 {% endblock %}

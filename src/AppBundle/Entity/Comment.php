@@ -52,6 +52,11 @@ class Comment
      */
     private $updated_at;
 
+    public function __construct(BlogArticle $blog = null)
+    {
+        $this->setBlog($blog);
+    }
+
     /**
      * Get id
      *
