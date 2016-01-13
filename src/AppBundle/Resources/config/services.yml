@@ -6,3 +6,8 @@ services:
         factory: [@doctrine.orm.entity_manager, getRepository]
         arguments:
             - AppBundle\Entity\BlogArticle
+    app.comment_repository:
+        class: AppBundle\Repository\CommentRepository
+        factory: [@doctrine.orm.entity_manager, getRepository]
+        arguments:
+            - AppBundle\Entity\Comment
