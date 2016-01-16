@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\EntityInterface;
+use AppBundle\Entity\BlogArticle;
 
 /**
  * BlogArticleRepository
@@ -15,11 +16,12 @@ class BlogArticleRepository extends EntityRepository
 {
     public function add(EntityInterface $entity)
     {
+        assert($entity instanceof BlogArticle);
         $this->getEntityManager()->persist($entity);
-        $this->commit();
+        $this->flush();
     }
 
-    private function commit()
+    private function flush()
     {
         $this->getEntityManager()->flush();
     }
