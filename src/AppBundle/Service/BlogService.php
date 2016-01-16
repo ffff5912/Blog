@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\BlogArticle;
 use AppBundle\Repository\BlogArticleRepository;
@@ -17,7 +16,7 @@ class BlogService
     private $repository;
 
     /**
-     * @param EntityManager $entity_manager
+     * @param BlogArticleRepository $repository
      * @DI\InjectParams({
      *   "repository" = @DI\Inject("app.blog_article_repository")
      * })
@@ -34,7 +33,6 @@ class BlogService
 
     /**
      * @param  BlogArticle $blog_article
-     * @return
      */
     public function add(BlogArticle $blog_article)
     {
