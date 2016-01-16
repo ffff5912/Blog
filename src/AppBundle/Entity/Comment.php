@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints As Assert;
 use AppBundle\Entity\BlogArticle;
 
 /**
@@ -12,7 +13,7 @@ use AppBundle\Entity\BlogArticle;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Comment
+class Comment implements EntityInterface
 {
     /**
      * @var int
@@ -27,6 +28,7 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="comment", type="text")
+     * @Assert\NotBlank()
      */
     private $comment;
 
