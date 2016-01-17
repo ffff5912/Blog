@@ -67,6 +67,16 @@ class BlogArticle implements EntityInterface
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * Set id
+     *
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * Get id
