@@ -14,10 +14,23 @@ use AppBundle\Entity\BlogArticle;
  */
 class BlogArticleRepository extends EntityRepository
 {
+    /**
+     * @param EntityInterface $entity
+     */
     public function add(EntityInterface $entity)
     {
         assert($entity instanceof BlogArticle);
         $this->getEntityManager()->persist($entity);
+        $this->flush();
+    }
+
+    /**
+     * @param  EntityInterface $entity
+     */
+    public function remove(EntityInterface $entity)
+    {
+        assert($entity instanceof BlogArticle);
+        $this->getEntityManager()->remove($entity);
         $this->flush();
     }
 
