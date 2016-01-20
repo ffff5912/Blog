@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Tests\Service;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\BlogArticle;
 use AppBundle\Repository\BlogArticleRepository;
 use AppBundle\Service\BlogService;
@@ -39,6 +40,36 @@ class BlogServiceTest extends \PHPUnit_Framework_Testcase
         $this->blog_service->add($blog_article);
 
         $this->assertEquals($blog_article, $this->repository->find(1));
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPostsSuccess()
+    {
+        $blogs = new ArrayCollection();
+        $blog_article = new BlogArticle();
+        $blog_article->setId(1);
+        $blog_article->setTitle('test');
+        $blog_article->setContent('content');
+        $blogs->add($blog_article);
+
+        $blog_article = new BlogArticle();
+        $blog_article->setId(2);
+        $blog_article->setTitle('test_2');
+        $blog_article->setContent('content_2');
+        $blogs->add($blog_article);
+
+        $this->repository->expects($this->once())
+            ->method('findAll')
+            ->will($this->returnValue($blogs));
+
+        $posts = $this->blog_service->getAllPosts();
+
+        $post = $posts->first();
+        $this->assertCount(2, $posts->toArray());
+        $this->assertInstanceOf('AppBundle\Entity\BlogArticle', $post);
+        $this->assertEquals(1, $post->getId());
     }
 
     protected function setUp()
