@@ -49,11 +49,11 @@ class Category implements EntityInterface
      */
     private $updatedAt;
 
-    public function __construct()
+    public function __construct($id = null)
     {
+        $this->id = $id;
         $this->blogs = new ArrayCollection();
     }
-
 
     /**
      * Get id

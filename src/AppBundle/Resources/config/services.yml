@@ -11,3 +11,8 @@ services:
         factory: [@doctrine.orm.entity_manager, getRepository]
         arguments:
             - AppBundle\Entity\Comment
+    app.category_repository:
+        class: AppBundle\Repository\CategoryRepository
+        factory: [@doctrine.orm.entity_manager, getRepository]
+        arguments:
+            - AppBundle\Entity\Category
