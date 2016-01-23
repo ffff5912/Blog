@@ -26,6 +26,9 @@ class BlogService
         $this->repository = $repository;
     }
 
+    /**
+     * @return ArrayCollection<BlogArticle>
+     */
     public function getAllPosts()
     {
         return $this->repository->findAll();
@@ -37,5 +40,13 @@ class BlogService
     public function add(BlogArticle $blog_article)
     {
         $this->repository->add($blog_article);
+    }
+
+    /**
+     * @param  BlogArticle $blog_article
+     */
+    public function remove(BlogArticle $blog_article)
+    {
+        $this->repository->remove($blog_article);
     }
 }
