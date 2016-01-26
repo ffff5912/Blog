@@ -1,0 +1,19 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block body %}
+<h2>カテゴリ一覧</h2>
+<table>
+    <tr>
+        <th>
+            カテゴリ名
+        </th>
+        <th></th>
+    </tr>
+    {% for category in categories %}
+    <tr>
+        <td>{{ category.name }}</td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

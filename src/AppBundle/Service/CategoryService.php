@@ -29,7 +29,7 @@ class CategoryService
     /**
      * @return ArrayCollection<Category>
      */
-    public function getAllPosts()
+    public function getAll()
     {
         return $this->repository->findAll();
     }
