@@ -58,7 +58,7 @@ class CategoryServiceTest extends \PHPUnit_Framework_Testcase
 
     private function createCategory($id, $name)
     {
-        $category = new Category(1);
+        $category = new Category($id);
         $category->setName($name);
 
         return $category;
