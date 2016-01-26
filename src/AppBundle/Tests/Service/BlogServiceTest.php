@@ -31,15 +31,9 @@ class BlogServiceTest extends \PHPUnit_Framework_Testcase
         $this->repository->expects($this->once())
             ->method('add');
 
-        // arrange
-        $this->repository->expects($this->any())
-            ->method('find')
-            ->with(1)
-            ->will($this->returnValue($blog_article));
+        $result = $this->blog_service->add($blog_article);
 
-        $this->blog_service->add($blog_article);
-
-        $this->assertEquals($blog_article, $this->repository->find(1));
+        $this->assertInstanceOf('AppBundle\Entity\BlogArticle', $result);
     }
 
     /**

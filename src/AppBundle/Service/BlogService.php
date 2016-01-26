@@ -40,6 +40,8 @@ class BlogService
     public function add(BlogArticle $blog_article)
     {
         $this->repository->add($blog_article);
+
+        return $blog_article;
     }
 
     /**
