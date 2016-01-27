@@ -21,7 +21,7 @@ class CategoryRepository extends EntityRepository
         $this->flush();
     }
 
-    private function flush()
+    public function flush()
     {
         $this->getEntityManager()->flush();
     }

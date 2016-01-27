@@ -52,4 +52,9 @@ class CategoryService
     {
         $this->repository->remove($category);
     }
+
+    public function update()
+    {
+        $this->repository->flush();
+    }
 }

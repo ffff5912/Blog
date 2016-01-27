@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints As Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -27,6 +28,7 @@ class Category implements EntityInterface
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=20)
+     * @Assert\NotBlank()
      */
     private $name;
 

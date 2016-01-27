@@ -8,10 +8,12 @@
             カテゴリ名
         </th>
         <th></th>
+        <th></th>
     </tr>
     {% for category in categories %}
     <tr>
         <td>{{ category.name }}</td>
+        <td><a href="{{ path('category_edit', {'id': category.getId()}) }}">編集</a></td>
         <td></td>
     </tr>
     {% endfor %}
