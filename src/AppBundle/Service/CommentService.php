@@ -32,5 +32,7 @@ class CommentService
     public function add(Comment $comment)
     {
         $this->repository->add($comment);
+
+        return $comment;
     }
 }
