@@ -14,10 +14,23 @@ use AppBundle\Entity\Category;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @param  EntityInterface $entity
+     */
     public function add(EntityInterface $entity)
     {
         assert($entity instanceof Category);
         $this->getEntityManager()->persist($entity);
+        $this->flush();
+    }
+
+    /**
+     * @param  EntityInterface $entity
+     */
+    public function remove(EntityInterface $entity)
+    {
+        assert($entity instanceof $entity);
+        $this->getEntityManager()->remove($entity);
         $this->flush();
     }
 

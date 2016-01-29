@@ -10,11 +10,11 @@
         <th></th>
         <th></th>
     </tr>
-    {% for category in categories %}
+    {% for category in categories if category %}
     <tr>
         <td>{{ category.name }}</td>
         <td><a href="{{ path('category_edit', {'id': category.getId()}) }}">編集</a></td>
-        <td></td>
+        <td><a href="{{ path('category_remove', {'id': category.getId()}) }}">削除</a></td>
     </tr>
     {% endfor %}
 </table>
