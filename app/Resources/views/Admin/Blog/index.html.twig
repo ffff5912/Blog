@@ -26,6 +26,15 @@
                         {{ form_errors(form.content) }}
                     </td>
                 </tr>
+                <tr>
+                    <th>
+                        <i class="fa fa-circle"></i>
+                        カテゴリ
+                    </th>
+                    <td>
+                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                    </td>
+                </tr>
             </table>
             <div class="text-center">
                 {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}

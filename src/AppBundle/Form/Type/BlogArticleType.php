@@ -32,6 +32,10 @@ class BlogArticleType extends AbstractType
         $builder
             ->add('title', 'text')
             ->add('content', 'textarea')
+            ->add('category', 'entity', [
+                'class' => 'AppBundle:Category',
+                'property' => 'name'
+            ])
             ->add('submit', 'submit', [
                 'label' => '投稿'
             ]);

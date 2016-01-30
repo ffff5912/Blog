@@ -50,6 +50,8 @@ class BlogArticle implements EntityInterface
     private $comments;
 
     /**
+     * @var Category
+     *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="blogs")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
