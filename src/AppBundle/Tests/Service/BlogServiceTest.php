@@ -3,6 +3,7 @@ namespace AppBundle\Tests\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use AppBundle\Entity\BlogArticle;
+use AppBundle\Entity\Category;
 use AppBundle\Repository\BlogArticleRepository;
 use AppBundle\Service\BlogService;
 
@@ -27,6 +28,7 @@ class BlogServiceTest extends \PHPUnit_Framework_Testcase
         $blog_article->setId(1);
         $blog_article->setTitle('test');
         $blog_article->setContent('content');
+        $blog_article->setCategory($this->createCategory(1));
 
         $this->repository->expects($this->once())
             ->method('add');
@@ -34,6 +36,7 @@ class BlogServiceTest extends \PHPUnit_Framework_Testcase
         $result = $this->blog_service->add($blog_article);
 
         $this->assertInstanceOf('AppBundle\Entity\BlogArticle', $result);
+        $this->assertInstanceOf('AppBundle\Entity\Category', $result->getCategory());
     }
 
     /**
@@ -46,12 +49,14 @@ class BlogServiceTest extends \PHPUnit_Framework_Testcase
         $blog_article->setId(1);
         $blog_article->setTitle('test');
         $blog_article->setContent('content');
+        $blog_article->setCategory($this->createCategory(1));
         $blogs->add($blog_article);
 
         $blog_article = new BlogArticle();
         $blog_article->setId(2);
         $blog_article->setTitle('test_2');
         $blog_article->setContent('content_2');
+        $blog_article->setCategory($this->createCategory(1));
         $blogs->add($blog_article);
 
         $this->repository->expects($this->once())
@@ -73,5 +78,12 @@ class BlogServiceTest extends \PHPUnit_Framework_Testcase
             ->getMock();
 
         $this->blog_service = new BlogService($this->repository);
+    }
+
+    private function createCategory($id)
+    {
+        $category = new Category($id);
+
+        return $category;
     }
 }
