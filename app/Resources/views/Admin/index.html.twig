@@ -1,0 +1,29 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block title %}ブログ{% endblock %}
+
+{% block body %}
+<h2 class="sub-header">ブログ一覧</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>タイトル</th>
+            <th>カテゴリ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for blog in blogs %}
+        <tr>
+            <td>{{ blog.id }}</td>
+            <td>{{ blog.title }}</td>
+            <td>
+                {% if blog.getCategory().getName() is defined %}
+                    {{ blog.getCategory().getName() }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
