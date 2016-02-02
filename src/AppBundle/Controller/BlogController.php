@@ -36,7 +36,7 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/show/{id}")
+     * @Route("/show/{id}", name="blog_show")
      * @ParamConverter("blog", class="AppBundle:BlogArticle")
      * @Method("get")
      */

@@ -6,7 +6,9 @@
         <div class="row pad-row">
             <div class="">
                 {% for blog in blogs %}
-                <h2>{{ blog.title }}</h2>
+                <a href="{{ path('blog_show', {'id': blog.id}) }}">
+                    <h2>{{ blog.title }}</h2>
+                </a>
                 <p>
                     {{ blog.content }}
                 </p>
