@@ -3,7 +3,7 @@ namespace AppBundle\Service;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\Category;
-use AppBundle\Repository\CategoryRepository;
+use AppBundle\Repository\RepositoryInterface;
 
 /**
  * @DI\Service("app.category_service")
@@ -21,7 +21,7 @@ class CategoryService
      *   "repository" = @DI\Inject("app.category_repository")
      * })
      */
-    public function __construct(CategoryRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

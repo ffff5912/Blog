@@ -3,7 +3,7 @@ namespace AppBundle\Service;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\BlogArticle;
-use AppBundle\Repository\BlogArticleRepository;
+use AppBundle\Repository\RepositoryInterface;
 
 /**
  * @DI\Service("app.blog_service")
@@ -21,7 +21,7 @@ class BlogService
      *   "repository" = @DI\Inject("app.blog_article_repository")
      * })
      */
-    public function __construct(BlogArticleRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

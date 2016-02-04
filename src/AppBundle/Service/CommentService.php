@@ -3,7 +3,7 @@ namespace AppBundle\Service;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\Comment;
-use AppBundle\Repository\CommentRepository;
+use AppBundle\Repository\RepositoryInterface;
 
 /**
  * @DI\Service("app.comment_service")
@@ -21,7 +21,7 @@ class CommentService
      *   "repository" = @DI\Inject("app.comment_repository")
      * })
      */
-    public function __construct(CommentRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
