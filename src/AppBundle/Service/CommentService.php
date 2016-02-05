@@ -16,7 +16,7 @@ class CommentService
     private $repository;
 
     /**
-    * @param CommentRepository $repository
+     * @param CommentRepository $repository
      * @DI\InjectParams({
      *   "repository" = @DI\Inject("app.comment_repository")
      * })
@@ -34,5 +34,13 @@ class CommentService
         $this->repository->add($comment);
 
         return $comment;
+    }
+
+    /**
+     * @param  Comment $comment
+     */
+    public function remove(Comment $comment)
+    {
+        $this->repository->remove($comment);
     }
 }
