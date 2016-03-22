@@ -25,6 +25,29 @@ class BlogArticleRepository extends EntityRepository implements RepositoryInterf
     }
 
     /**
+     * @param  string $year
+     * @param  string $month
+     * @return array
+     */
+    public function findByYearAndMonth($year, $month)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder()
+            ->select('b')
+            ->from('AppBundle\Entity\BlogArticle', 'b')
+            ->leftJoin('AppBundle\Entity\Category', 'ca', \Doctrine\ORM\Query\Expr\Join::WITH, 'b.category = ca.id')
+            ->leftJoin('AppBundle\Entity\Comment', 'co', \Doctrine\ORM\Query\Expr\Join::WITH, 'b.id = co.blog')
+            ->where('YEAR(b.created_at) = :year')
+            ->andWhere('MONTH(b.created_at) = :month')
+            ->setParameter(':year', $year)
+            ->setParameter(':month', $month)
+            ->orderBy('b.created_at', 'DESC');
+
+        $posts = $qb->getQuery()->getResult();
+
+        return $posts;
+    }
+
+    /**
      * @param  EntityInterface $entity
      */
     public function remove(EntityInterface $entity)

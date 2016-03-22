@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Service;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\DiExtraBundle\Annotation as DI;
 use AppBundle\Entity\BlogArticle;
 use AppBundle\Repository\RepositoryInterface;
@@ -32,6 +33,19 @@ class BlogService
     public function getAllPosts()
     {
         return $this->repository->findAll();
+    }
+
+    /**
+     * @param  [string] $year
+     * @param  [string] $month
+     * @return ArrayCollection<BrogArticle>
+     */
+    public function getPostByYearAndMonth($year, $month)
+    {
+        $posts = $this->repository->findByYearAndMonth($year, $month);
+        $post_collection = new ArrayCollection($posts);
+
+        return $post_collection;
     }
 
     /**
