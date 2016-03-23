@@ -24,11 +24,11 @@ class BlogSearchController extends Controller
     }
 
     /**
-     * @Route("/article/{date}")
+     * @Route("/article/{year}/{month}", requirements={"year": "\d{4}", "month": "\d{1,2}"})
      */
-    public function searchAction($date)
+    public function dateAction($year, $month)
     {
-        $blogs = $this->service->getPostsByDate($date);
+        $blogs = $this->service->getPostByYearAndMonth($year, $month);
 
         return $this->render('Blog/index.html.twig', [
             'blogs' => $blogs
